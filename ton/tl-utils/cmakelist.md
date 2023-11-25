@@ -1,3 +1,8 @@
+<details>
+  <summary>
+    source code
+  </summary>
+
 ```txt
 cmake_minimum_required(VERSION 3.0.2 FATAL_ERROR)
 
@@ -44,6 +49,7 @@ It looks like you've provided a CMakeLists.txt snippet for a project related to 
    target_include_directories(tl-utils PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>)
    target_link_libraries(tl-utils PUBLIC tl_api ton_crypto )
    ```
+   </details>
    This block defines a static library called `tl-utils` that includes source files `common-utils.hpp`, `tl-utils.hpp`, and `tl-utils.cpp`. It specifies include directories and links the library to other dependencies, such as `tl_api` and `ton_crypto`.
 
 3. **TON Lite Utility Library:**
