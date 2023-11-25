@@ -130,7 +130,7 @@ Overall, this `Actor` class appears to be a fundamental building block for the a
 
   <summary>
 
-  ### What is a virtual constructor in C++?
+   `What is a virtual constructor in C++?`
     
   </summary>
 
@@ -196,7 +196,7 @@ It's important to note that this is not a standard idiom in C++ and is often not
   
   <summary>
 
-  ### What is a virtual function in C++?
+  `What is a virtual function in C++?`
 
   </summary>
   
@@ -262,4 +262,62 @@ Virtual functions are a key mechanism for achieving polymorphism in C++, enablin
 
 
 </details>
+<details>
 
+  <summary>
+
+    `What is a friend class in C++?`
+    
+  </summary>
+
+  In C++, a friend class is a class that is granted access to the private and protected members of another class. This access permission is declared using the `friend` keyword in the class declaration. A friend class can access the private and protected members of the class it is a friend of, as if it were a member of that class.
+
+Here's a basic example to illustrate the concept:
+
+```cpp
+class MyClass {
+private:
+    int privateData;
+
+public:
+    MyClass(int data) : privateData(data) {}
+
+    friend class FriendClass; // Declaration of FriendClass as a friend
+};
+
+class FriendClass {
+public:
+    void accessPrivateData(const MyClass& obj) {
+        // FriendClass can access private members of MyClass
+        int data = obj.privateData;
+        std::cout << "Accessed private data: " << data << std::endl;
+    }
+};
+
+int main() {
+    MyClass myObject(42);
+
+    FriendClass friendObject;
+    friendObject.accessPrivateData(myObject);
+
+    return 0;
+}
+```
+
+In this example, `FriendClass` is declared as a friend of `MyClass`. As a result, `FriendClass` can access the private member `privateData` of `MyClass` in the `accessPrivateData` function. This allows for a controlled and limited form of access to the private members of a class.
+
+It's important to note a few things about friend classes:
+
+1. **Limited Scope:**
+   - The friendship is not mutual. Declaring `FriendClass` as a friend of `MyClass` does not automatically make `MyClass` a friend of `FriendClass`. Friendship is not inherited or transitive.
+
+2. **Encapsulation Considerations:**
+   - Using friend classes breaks encapsulation to some extent because it allows external classes access to the internal details of another class.
+   - Friendships should be used judiciously to balance encapsulation and the need for specific classes to access private or protected members.
+
+3. **Declaration Order Matters:**
+   - The friend declaration must appear in the class that is granting friendship. It's common to declare friend classes at the beginning of the class definition.
+
+While friend classes can be useful in specific scenarios, it's generally advisable to favor encapsulation and limit the use of friend classes to cases where they provide a clear advantage in terms of code design and functionality.
+
+</details>
