@@ -85,3 +85,6 @@ Let's break down the key components of the `ActorMailbox` class:
    - `td::MpscLinkQueue<ActorMessage>::Reader reader_`: A reader for the queue, used to iterate over and process messages.
 
 In summary, the `ActorMailbox` class represents a mailbox for actors in the TON blockchain system. It provides methods for adding messages to the mailbox, reading messages, and clearing the mailbox. The underlying queue (`td::MpscLinkQueue`) is designed for efficient and concurrent message handling. The class follows a move-only semantics as it deletes the copy constructor and copy assignment operator.
+
+
+<
