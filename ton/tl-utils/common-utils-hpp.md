@@ -2,7 +2,9 @@
   <summary>
     Source Code
   </summary>
-```cpp
+
+  
+```hpp
   /*
     This file is part of TON Blockchain Library.
 
@@ -217,3 +219,25 @@ auto create_hash_tl_object(Args &&... args) {
 
   ```
 </details>
+
+This C++ code is part of the TON (Telegram Open Network) Blockchain Library. Let's break down the key components and functions:
+
+1. **License Information:** The code starts with license information stating that it's distributed under the GNU Lesser General Public License (LGPL) version 2.0 or later.
+
+2. **Header Inclusions:** The code includes necessary headers for TON Blockchain Library and some utilities. Notably, it includes "tl/tl_object_parse.h" and "td/utils/tl_parsers.h."
+
+3. **Namespace:** The code resides in the "ton" namespace.
+
+4. **Template Functions:** There are template functions for serializing and fetching TL objects. TL objects (Type Language objects) are a serialization format used in Telegram services.
+
+5. **Serialization Functions:** There are functions like `serialize_tl_object`, `get_tl_object_sha256`, and `get_tl_object_sha_bits256` that handle the serialization and hashing of TL objects.
+
+6. **Fetching Functions:** The `fetch_tl_object` and `fetch_result` functions are responsible for deserializing TL objects from buffer slices.
+
+7. **Error Handling:** The code includes error handling mechanisms, such as checking the status of the parser and logging errors.
+
+8. **Deprecated Function:** The `clone_tl_object` function is marked as deprecated. It clones a TL object by serializing and then deserializing it.
+
+9. **Helper Functions:** There are functions like `create_serialize_tl_object` and `create_hash_tl_object` that assist in creating, serializing, and hashing TL objects.
+
+Overall, the code appears to be a set of utility functions for working with TL objects in the context of the TON Blockchain Library. The TL objects likely represent data structures used in the blockchain protocol. If you have specific questions or if there's a particular aspect you'd like to delve into, feel free to ask!
