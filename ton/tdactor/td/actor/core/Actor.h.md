@@ -130,7 +130,7 @@ Overall, this `Actor` class appears to be a fundamental building block for the a
 
   <summary>
 
-   `What is a virtual constructor in C++?`
+    What is a virtual constructor in C++?
     
   </summary>
 
@@ -196,7 +196,7 @@ It's important to note that this is not a standard idiom in C++ and is often not
   
   <summary>
 
-  `What is a virtual function in C++?`
+    What is a virtual function in C++?
 
   </summary>
   
@@ -266,7 +266,7 @@ Virtual functions are a key mechanism for achieving polymorphism in C++, enablin
 
   <summary>
 
-    `What is a friend class in C++?`
+    What is a friend class in C++?
     
   </summary>
 
