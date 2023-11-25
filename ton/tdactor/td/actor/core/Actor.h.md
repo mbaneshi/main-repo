@@ -193,9 +193,10 @@ It's important to note that this is not a standard idiom in C++ and is often not
 
 
 <details>
+  
   <summary>
 
-what is virtual function in C++?
+What is a virtual function in C++?
 
   </summary>
   
