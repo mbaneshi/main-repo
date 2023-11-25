@@ -1,4 +1,4 @@
-[ChatGPT](https://chat.openai.com/c/c536cf7d-06ae-4cdf-a9a1-dc7771ea83dd)
+[ChatGPT](https://chat.openai.com/c/37d4b794-7b27-4d81-92b1-15a75ea447e5)
 
 <details>
   <summary>
@@ -9,39 +9,80 @@
   
 ```cpp
 
-/*
-    This file is part of TON Blockchain Library.
 
-    TON Blockchain Library is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as published by
-    the Free Software Foundation, either version 2 of the License, or
-    (at your option) any later version.
+#pragma once
+#include "td/actor/PromiseFuture.h"
 
-    TON Blockchain Library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Lesser General Public License for more details.
+namespace td {
+namespace detail {
+class MultiPromiseImpl;
+}
 
-    You should have received a copy of the GNU Lesser General Public License
-    along with TON Blockchain Library.  If not, see <http://www.gnu.org/licenses/>.
+class MultiPromise {
+  using Impl = detail::MultiPromiseImpl;
 
-    Copyright 2017-2020 Telegram Systems LLP
-*/
-#include "td/actor/MultiPromise.h"
+ public:
+  struct Options {
+    Options() {
+    }
+    bool ignore_errors{false};
+  };
+  explicit MultiPromise(Options options = Options{}) : options_(options) {
+  }
+
+  struct InitGuard {
+   public:
+    InitGuard() = default;
+    InitGuard(std::shared_ptr<Impl> impl) : impl_(std::move(impl)) {
+    }
+    InitGuard(InitGuard &&other) = default;
+    InitGuard &operator=(InitGuard &&other) = default;
+    InitGuard(const InitGuard &other) = delete;
+    InitGuard &operator=(const InitGuard &other) = delete;
+
+    void add_promise(Promise<> promise);
+    Promise<> get_promise();
+    bool empty() const;
+    explicit operator bool() const;
+
+   private:
+    std::shared_ptr<Impl> impl_;
+  };
+
+  TD_WARN_UNUSED_RESULT InitGuard init_guard();
+  TD_WARN_UNUSED_RESULT InitGuard add_promise_or_init(Promise<> promise);
+
+ private:
+  Options options_;
+  std::weak_ptr<Impl> impl_;
+};
+}  // namespace td
 
 
 
   ```
 </details>
 
-It looks like you've shared the beginning of a C++ source file from the TON Blockchain Library. The provided code includes a copyright notice and an include directive for a header file named "MultiPromise.h" in the "td/actor" directory.
+The provided code appears to be a part of the TD (Telegram Database) library, specifically related to the implementation of a `MultiPromise` class. Let's break down the code:
 
-Let's break down the code:
+1. The code begins with inclusion of the header file "td/actor/PromiseFuture.h".
 
-1. **Copyright Notice:** The comments at the beginning indicate that this file is part of the TON Blockchain Library, and it is released under the GNU Lesser General Public License (LGPL). This means that the code is open-source, and you have the freedom to redistribute and modify it under the terms of the LGPL.
+2. The `MultiPromise` class is declared within the `td` namespace.
 
-2. **Include Directive:** The code includes the header file "td/actor/MultiPromise.h". Including header files is a common practice in C++ to bring in declarations and definitions from other files, allowing the program to use functionality defined in those files.
+3. It has a private nested class called `Impl` within the `detail` namespace. This indicates that the actual implementation details are hidden from external users.
 
-Since we're at the beginning of the file, we don't have specific code details yet. The inclusion of "MultiPromise.h" suggests that this file may involve working with promises in a multi-actor environment, but to understand the system better, we would need to explore the contents of "MultiPromise.h" and other related files.
+4. The `MultiPromise` class has a public nested struct `Options`, which is used to configure the behavior of the `MultiPromise`. In this case, it has a boolean field `ignore_errors` with a default value of `false`.
 
-If you have specific questions about parts of the code or if there's a particular aspect you'd like to delve into, feel free to provide more details or ask for clarification on specific elements.
+5. The constructor of `MultiPromise` takes an optional parameter of type `Options`, allowing users to configure the behavior when creating an instance of `MultiPromise`.
+
+6. There is a public nested struct named `InitGuard`. This struct seems to be a helper class for managing promises. It has methods to add promises, get promises, check if it's empty, and has an explicit conversion to a boolean.
+
+7. The `MultiPromise` class has a member variable `options_` of type `Options` to store the configuration options.
+
+8. It also has a member variable `impl_` of type `std::weak_ptr<Impl>`. This suggests that the actual implementation of the `MultiPromise` is managed through a shared pointer, and the weak pointer is used to avoid cyclic dependencies.
+
+9. The `init_guard` method creates and returns an `InitGuard` object. This method is marked with `TD_WARN_UNUSED_RESULT`, which suggests that it's encouraging the user to check the result or use it in some way.
+
+10. The `add_promise_or_init` method either adds a promise or initializes an `InitGuard` object if it hasn't been initialized before.
+
+Overall, this code defines the interface for a `MultiPromise` class, which appears to be a part of a larger system, possibly related to the Telegram messaging platform given the use of the "td" namespace. The implementation details are likely in the `detail::MultiPromiseImpl` class, which is not provided in the snippet.
