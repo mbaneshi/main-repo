@@ -162,3 +162,60 @@ This code appears to be part of a C++ library for actor-based concurrency, likel
    - `old_log_tag_`: A log tag for the actor.
 
 This code seems to be a crucial part of an actor-based system, likely for concurrent and asynchronous processing. To understand it fully, you would need to look at its usage within the broader context of the TON blockchain code. If you have specific questions about certain parts of the code or its integration into the larger system, feel free to ask.
+
+<details>
+
+   <summary>
+
+       explain various signals like Pause, Kill, StartUp, Wakeup, Alarm, and Message?
+
+
+   </summary>
+
+
+   Certainly! In the provided C++ code for the actor system, various signals are used to communicate and control the behavior of actors. Let's go through each of them:
+
+1. **Pause:**
+   - Signal: `ActorSignals::Pause`
+   - Purpose: Indicates that the actor should pause its execution.
+   - Usage:
+     - Setting the `pause` flag in the actor execution context.
+     - During execution, the actor may encounter a pause signal, leading to a temporary suspension of its activities.
+
+2. **Kill:**
+   - Signal: `ActorSignals::Kill`
+   - Purpose: Indicates that the actor should stop and terminate its execution.
+   - Usage:
+     - Setting the `stop` flag in the actor execution context.
+     - Upon receiving this signal, the actor is expected to perform any necessary cleanup before terminating.
+
+3. **StartUp:**
+   - Signal: `ActorSignals::StartUp`
+   - Purpose: Indicates that the actor should perform startup actions.
+   - Usage:
+     - Invoking the `start_up` function on the actor.
+     - Typically used to initialize the actor's state or perform any required setup before regular execution.
+
+4. **Wakeup:**
+   - Signal: `ActorSignals::Wakeup`
+   - Purpose: Indicates that the actor should wake up from a paused state or take some action after being idle.
+   - Usage:
+     - Invoking the `wake_up` function on the actor.
+     - Used to resume execution or perform specific actions after a pause.
+
+5. **Alarm:**
+   - Signal: `ActorSignals::Alarm`
+   - Purpose: Used for signaling an alarm or time-related event.
+   - Usage:
+     - Handling alarms and time-sensitive events in the actor.
+     - The actor may have an associated timestamp for an alarm, and this signal triggers actions when the alarm time is reached.
+
+6. **Message:**
+   - Signal: `ActorSignals::Message`
+   - Purpose: Indicates the presence of messages in the actor's mailbox.
+   - Usage:
+     - Handling incoming messages in the actor.
+     - Typically, the actor processes messages from its mailbox during execution.
+
+These signals provide a way for the actor system to control the flow of execution, handle specific events, and manage the lifecycle of actors. Actors respond to these signals by adjusting their behavior accordingly. The usage and interpretation of these signals may vary depending on the specific requirements and design of the actor system.
+</details>
