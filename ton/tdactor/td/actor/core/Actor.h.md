@@ -130,7 +130,7 @@ Overall, this `Actor` class appears to be a fundamental building block for the a
 
   <summary>
 
-    What is a virtual constructor in C++?
+  ### What is a virtual constructor in C++?
     
   </summary>
 
@@ -196,7 +196,7 @@ It's important to note that this is not a standard idiom in C++ and is often not
   
   <summary>
 
-What is a virtual function in C++?
+  ### What is a virtual function in C++?
 
   </summary>
   
